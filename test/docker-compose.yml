@@ -31,13 +31,14 @@ services:
       - MYSQL_DATABASE=socksdb
   carts:
     build:
-      context: ../../sock-shop-carts/target  # Path to the folder you cloned
-      dockerfile: ../docker/carts/Dockerfile
+      context: ../docker/carts/ # Path to the folder you cloned
+      dockerfile: Dockerfile
     hostname: carts
     restart: always
     environment:
       - MONGO_HOST=carts-db:27017
       - reschedule:on-node-failure
+
   carts-db:
     image: mongo:3.4
     hostname: carts-db
@@ -54,8 +55,8 @@ services:
 
   orders:
     build:
-      context: ../../sock-shop-orders/target  # Path to the folder you cloned
-      dockerfile: ../docker/orders/Dockerfile
+      context: ../docker/orders/  # Path to the folder you cloned
+      dockerfile: Dockerfile
     hostname: orders
     restart: always
     environment:
@@ -71,8 +72,8 @@ services:
       - reschedule:on-node-failure
   shipping:
     build:
-      context: ../../sock-shop-shipping/target  # Path to the folder you cloned
-      dockerfile: ../docker/shipping/Dockerfile
+      context: ../docker/shipping/  # Path to the folder you cloned
+      dockerfile: Dockerfile
     hostname: shipping
     restart: always
     environment:
@@ -80,8 +81,8 @@ services:
 
   queue-master:
     build:
-      context: ../../sock-shop-queue-master/target
-      dockerfile: ../docker/queue-master/Dockerfile
+      context: ../docker/queue-master
+      dockerfile: Dockerfile
     hostname: queue-master
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
